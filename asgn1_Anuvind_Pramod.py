@@ -5,7 +5,7 @@ class LinReg:
     def __init__(self, data):
         self.x = np.array([d[0] for d in data])
         self.y = np.array([d[1] for d in data])
-        self.w = 0
+        self.w = np.random.randn()
     def get_weights(self):
         return np.array([self.w])
 
@@ -27,19 +27,10 @@ class LinReg:
             grad = self.gradient(self.x, self.y, y_pred)
             self.w -= learning_rate * grad
 
-
-
-
-
-
 # Load JSON data
 with open("asgn1_data_publish.json", "r") as f:
     dataset = json.load(f)
-
-# Flatten the dataset (since it's stored in multiple lists)
 flat_data = [item for sublist in dataset for item in sublist]
-
-# Train the model
 model = LinReg(flat_data)
 model.fit()
 
